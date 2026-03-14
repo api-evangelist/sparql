@@ -1,0 +1,173 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "sparql": "http://www.w3.org/2005/sparql-results#",
+    "sd": "http://www.w3.org/ns/sparql-service-description#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "hydra": "http://www.w3.org/ns/hydra/core#",
+    "void": "http://rdfs.org/ns/void#",
+
+    "SparqlEndpoint": {
+      "@id": "sd:Service",
+      "@type": "@id"
+    },
+    "SparqlQuery": {
+      "@id": "sd:Query",
+      "@type": "@id"
+    },
+    "SparqlUpdate": {
+      "@id": "sd:Update",
+      "@type": "@id"
+    },
+    "SparqlDataset": {
+      "@id": "sd:Dataset",
+      "@type": "@id"
+    },
+    "SparqlGraph": {
+      "@id": "sd:NamedGraph",
+      "@type": "@id"
+    },
+    "SparqlResultSet": {
+      "@id": "sparql:ResultSet",
+      "@type": "@id"
+    },
+
+    "endpoint": {
+      "@id": "sd:endpoint",
+      "@type": "@id"
+    },
+    "defaultDataset": {
+      "@id": "sd:defaultDataset",
+      "@type": "@id"
+    },
+    "defaultGraph": {
+      "@id": "sd:defaultGraph",
+      "@type": "@id"
+    },
+    "namedGraph": {
+      "@id": "sd:namedGraph",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "graphName": {
+      "@id": "sd:name",
+      "@type": "@id"
+    },
+    "supportedLanguage": {
+      "@id": "sd:supportedLanguage",
+      "@type": "@id"
+    },
+    "resultFormat": {
+      "@id": "sd:resultFormat",
+      "@type": "@id"
+    },
+    "feature": {
+      "@id": "sd:feature",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "extensionFunction": {
+      "@id": "sd:extensionFunction",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "propertyFeature": {
+      "@id": "sd:propertyFeature",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "defaultEntailmentRegime": {
+      "@id": "sd:defaultEntailmentRegime",
+      "@type": "@id"
+    },
+
+    "resultVariable": {
+      "@id": "sparql:resultVariable",
+      "@type": "xsd:string",
+      "@container": "@list"
+    },
+    "solution": {
+      "@id": "sparql:solution",
+      "@container": "@set"
+    },
+    "binding": {
+      "@id": "sparql:binding",
+      "@container": "@set"
+    },
+    "variable": {
+      "@id": "sparql:variable",
+      "@type": "xsd:string"
+    },
+    "sparqlValue": {
+      "@id": "sparql:value"
+    },
+    "boolean": {
+      "@id": "sparql:boolean",
+      "@type": "xsd:boolean"
+    },
+
+    "triples": {
+      "@id": "void:triples",
+      "@type": "xsd:integer"
+    },
+    "sparqlEndpointUrl": {
+      "@id": "void:sparqlEndpoint",
+      "@type": "@id"
+    },
+
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    },
+    "url": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "conformsTo": {
+      "@id": "dcterms:conformsTo",
+      "@type": "@id"
+    },
+    "label": {
+      "@id": "rdfs:label",
+      "@type": "xsd:string"
+    },
+    "comment": {
+      "@id": "rdfs:comment",
+      "@type": "xsd:string"
+    },
+
+    "SPARQL10Query": {
+      "@id": "sd:SPARQL10Query"
+    },
+    "SPARQL11Query": {
+      "@id": "sd:SPARQL11Query"
+    },
+    "SPARQL11Update": {
+      "@id": "sd:SPARQL11Update"
+    },
+    "DereferencesURIs": {
+      "@id": "sd:DereferencesURIs"
+    },
+    "UnionDefaultGraph": {
+      "@id": "sd:UnionDefaultGraph"
+    },
+    "RequiresDataset": {
+      "@id": "sd:RequiresDataset"
+    },
+    "EmptyGraphs": {
+      "@id": "sd:EmptyGraphs"
+    },
+    "BasicFederatedQuery": {
+      "@id": "sd:BasicFederatedQuery"
+    }
+  }
+}

@@ -1,0 +1,487 @@
+openapi: 3.0.3
+info:
+  title: SPARQL Protocol API
+  description: >-
+    OpenAPI specification for the SPARQL 1.1 Protocol, a W3C Recommendation
+    that defines HTTP operations for executing SPARQL queries and updates
+    against an RDF dataset. The protocol supports both query operations
+    (SELECT, ASK, CONSTRUCT, DESCRIBE) and update operations (INSERT, DELETE,
+    LOAD, CLEAR) via standard HTTP methods.
+  version: '1.1'
+  contact:
+    name: W3C SPARQL Working Group
+    url: https://www.w3.org/2009/sparql/wiki/Main_Page
+  license:
+    name: W3C Software and Document License
+    url: https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
+externalDocs:
+  description: SPARQL 1.1 Protocol - W3C Recommendation
+  url: https://www.w3.org/TR/sparql11-protocol/
+servers:
+  - url: '{sparqlEndpoint}'
+    description: SPARQL Protocol Endpoint
+    variables:
+      sparqlEndpoint:
+        default: https://dbpedia.org/sparql
+        description: The URL of the SPARQL endpoint
+paths:
+  /sparql:
+    get:
+      operationId: sparqlQueryGet
+      summary: Execute SPARQL Query via GET
+      description: >-
+        Executes a SPARQL query operation using HTTP GET. The query string is
+        passed as a URL parameter. This method is suitable for queries that
+        fit within URL length limits. Supports SELECT, ASK, CONSTRUCT, and
+        DESCRIBE query forms.
+      parameters:
+        - name: query
+          in: query
+          required: true
+          description: The SPARQL query string to execute
+          schema:
+            type: string
+          example: SELECT ?s ?p ?o WHERE { ?s ?p ?o } LIMIT 10
+        - $ref: '#/components/parameters/DefaultGraphUri'
+        - $ref: '#/components/parameters/NamedGraphUri'
+        - $ref: '#/components/parameters/Timeout'
+        - $ref: '#/components/parameters/AcceptQuery'
+      responses:
+        '200':
+          description: Query executed successfully
+          content:
+            application/sparql-results+json:
+              schema:
+                $ref: '#/components/schemas/SparqlResultsJson'
+            application/sparql-results+xml:
+              schema:
+                type: string
+                description: SPARQL Query Results XML Format
+            text/turtle:
+              schema:
+                type: string
+                description: RDF graph serialized as Turtle (CONSTRUCT/DESCRIBE)
+            application/rdf+xml:
+              schema:
+                type: string
+                description: RDF graph serialized as RDF/XML (CONSTRUCT/DESCRIBE)
+            application/ld+json:
+              schema:
+                type: object
+                description: RDF graph serialized as JSON-LD (CONSTRUCT/DESCRIBE)
+        '400':
+          $ref: '#/components/responses/MalformedQuery'
+        '500':
+          $ref: '#/components/responses/QueryExecutionFailure'
+    post:
+      operationId: sparqlQueryPost
+      summary: Execute SPARQL Query via POST
+      description: >-
+        Executes a SPARQL query operation using HTTP POST. The query can be
+        sent as a URL-encoded form parameter or directly in the request body.
+        This method supports arbitrarily long queries that may exceed URL
+        length limits.
+      parameters:
+        - $ref: '#/components/parameters/DefaultGraphUri'
+        - $ref: '#/components/parameters/NamedGraphUri'
+        - $ref: '#/components/parameters/Timeout'
+        - $ref: '#/components/parameters/AcceptQuery'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - query
+              properties:
+                query:
+                  type: string
+                  description: The SPARQL query string
+                default-graph-uri:
+                  type: string
+                  description: Default graph URI (alternative to query parameter)
+                named-graph-uri:
+                  type: string
+                  description: Named graph URI (alternative to query parameter)
+          application/sparql-query:
+            schema:
+              type: string
+              description: >-
+                The SPARQL query string sent directly as the request body
+                with Content-Type application/sparql-query.
+      responses:
+        '200':
+          description: Query executed successfully
+          content:
+            application/sparql-results+json:
+              schema:
+                $ref: '#/components/schemas/SparqlResultsJson'
+            application/sparql-results+xml:
+              schema:
+                type: string
+                description: SPARQL Query Results XML Format
+            text/turtle:
+              schema:
+                type: string
+                description: RDF graph serialized as Turtle (CONSTRUCT/DESCRIBE)
+            application/rdf+xml:
+              schema:
+                type: string
+                description: RDF graph serialized as RDF/XML (CONSTRUCT/DESCRIBE)
+            application/ld+json:
+              schema:
+                type: object
+                description: RDF graph serialized as JSON-LD (CONSTRUCT/DESCRIBE)
+        '400':
+          $ref: '#/components/responses/MalformedQuery'
+        '500':
+          $ref: '#/components/responses/QueryExecutionFailure'
+  /sparql-update:
+    post:
+      operationId: sparqlUpdate
+      summary: Execute SPARQL Update
+      description: >-
+        Executes a SPARQL 1.1 Update operation against the RDF dataset.
+        Supports INSERT DATA, DELETE DATA, INSERT/DELETE (with WHERE),
+        LOAD, CLEAR, CREATE, DROP, COPY, MOVE, and ADD operations.
+      parameters:
+        - name: using-graph-uri
+          in: query
+          description: >-
+            Default graph URI for the update operation. Multiple values
+            allowed to specify the dataset for the WHERE clause.
+          schema:
+            type: string
+          style: form
+          explode: true
+        - name: using-named-graph-uri
+          in: query
+          description: >-
+            Named graph URI for the update operation. Multiple values
+            allowed to specify named graphs for the WHERE clause.
+          schema:
+            type: string
+          style: form
+          explode: true
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - update
+              properties:
+                update:
+                  type: string
+                  description: The SPARQL Update string
+                using-graph-uri:
+                  type: string
+                  description: Default graph URI for the update
+                using-named-graph-uri:
+                  type: string
+                  description: Named graph URI for the update
+          application/sparql-update:
+            schema:
+              type: string
+              description: >-
+                The SPARQL Update string sent directly as the request body
+                with Content-Type application/sparql-update.
+      responses:
+        '200':
+          description: Update executed successfully
+        '204':
+          description: Update executed successfully (no content)
+        '400':
+          $ref: '#/components/responses/MalformedQuery'
+        '500':
+          $ref: '#/components/responses/QueryExecutionFailure'
+  /sparql-graph:
+    get:
+      operationId: graphStoreGet
+      summary: Retrieve Graph (Graph Store Protocol)
+      description: >-
+        Retrieves an RDF graph from the SPARQL Graph Store using HTTP GET.
+        Part of the SPARQL 1.1 Graph Store HTTP Protocol for managing
+        named graphs and the default graph.
+      parameters:
+        - name: graph
+          in: query
+          description: >-
+            URI of the named graph to retrieve. If omitted, the default
+            graph is returned.
+          schema:
+            type: string
+            format: uri
+        - name: default
+          in: query
+          description: Set to empty string to request the default graph
+          schema:
+            type: string
+        - name: Accept
+          in: header
+          schema:
+            type: string
+            enum:
+              - text/turtle
+              - application/rdf+xml
+              - application/ld+json
+              - application/n-triples
+              - application/n-quads
+            default: text/turtle
+      responses:
+        '200':
+          description: Graph returned successfully
+          content:
+            text/turtle:
+              schema:
+                type: string
+            application/rdf+xml:
+              schema:
+                type: string
+            application/ld+json:
+              schema:
+                type: object
+        '404':
+          description: Named graph not found
+    put:
+      operationId: graphStorePut
+      summary: Replace Graph (Graph Store Protocol)
+      description: >-
+        Replaces the contents of a graph with the provided RDF data.
+        Creates the graph if it does not exist.
+      parameters:
+        - name: graph
+          in: query
+          description: URI of the named graph to replace
+          schema:
+            type: string
+            format: uri
+        - name: default
+          in: query
+          description: Set to empty string to target the default graph
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          text/turtle:
+            schema:
+              type: string
+          application/rdf+xml:
+            schema:
+              type: string
+          application/ld+json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Graph replaced successfully
+        '201':
+          description: Graph created successfully
+        '204':
+          description: Graph replaced successfully (no content)
+        '400':
+          description: Malformed RDF payload
+    post:
+      operationId: graphStorePost
+      summary: Merge into Graph (Graph Store Protocol)
+      description: >-
+        Merges the provided RDF data into the specified graph,
+        adding triples without removing existing ones.
+      parameters:
+        - name: graph
+          in: query
+          description: URI of the named graph to merge into
+          schema:
+            type: string
+            format: uri
+        - name: default
+          in: query
+          description: Set to empty string to target the default graph
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          text/turtle:
+            schema:
+              type: string
+          application/rdf+xml:
+            schema:
+              type: string
+          application/ld+json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Triples merged successfully
+        '204':
+          description: Triples merged successfully (no content)
+        '400':
+          description: Malformed RDF payload
+    delete:
+      operationId: graphStoreDelete
+      summary: Delete Graph (Graph Store Protocol)
+      description: Deletes a named graph or clears the default graph.
+      parameters:
+        - name: graph
+          in: query
+          description: URI of the named graph to delete
+          schema:
+            type: string
+            format: uri
+        - name: default
+          in: query
+          description: Set to empty string to clear the default graph
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Graph deleted successfully
+        '204':
+          description: Graph deleted successfully (no content)
+        '404':
+          description: Named graph not found
+components:
+  parameters:
+    DefaultGraphUri:
+      name: default-graph-uri
+      in: query
+      description: >-
+        Specifies the default graph for the query. Multiple values may be
+        provided to define a dataset with a merged default graph.
+      schema:
+        type: string
+        format: uri
+      style: form
+      explode: true
+    NamedGraphUri:
+      name: named-graph-uri
+      in: query
+      description: >-
+        Specifies a named graph for the query dataset. Multiple values
+        may be provided.
+      schema:
+        type: string
+        format: uri
+      style: form
+      explode: true
+    Timeout:
+      name: timeout
+      in: query
+      description: >-
+        Maximum execution time for the query in milliseconds. Not part of
+        the W3C specification but commonly supported by SPARQL endpoints.
+      schema:
+        type: integer
+        minimum: 0
+    AcceptQuery:
+      name: Accept
+      in: header
+      description: Desired response content type
+      schema:
+        type: string
+        enum:
+          - application/sparql-results+json
+          - application/sparql-results+xml
+          - text/turtle
+          - application/rdf+xml
+          - application/ld+json
+          - text/csv
+          - text/tab-separated-values
+        default: application/sparql-results+json
+  schemas:
+    SparqlResultsJson:
+      type: object
+      description: >-
+        SPARQL Query Results JSON Format as defined by W3C. Used for
+        SELECT and ASK query results.
+      properties:
+        head:
+          type: object
+          description: Header information for the query results
+          properties:
+            vars:
+              type: array
+              description: >-
+                Ordered list of variable names from the SELECT clause.
+                Present for SELECT results.
+              items:
+                type: string
+            link:
+              type: array
+              description: Links to additional metadata
+              items:
+                type: string
+                format: uri
+        results:
+          type: object
+          description: >-
+            Contains the result bindings for SELECT queries.
+          properties:
+            bindings:
+              type: array
+              description: >-
+                Array of result solutions. Each binding is an object
+                mapping variable names to RDF term objects.
+              items:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/RdfTerm'
+        boolean:
+          type: boolean
+          description: >-
+            Result of an ASK query. Present instead of results for
+            ASK query forms.
+    RdfTerm:
+      type: object
+      description: >-
+        Represents an RDF term (IRI, literal, or blank node) in the
+        SPARQL Results JSON format.
+      required:
+        - type
+        - value
+      properties:
+        type:
+          type: string
+          description: The type of the RDF term
+          enum:
+            - uri
+            - literal
+            - bnode
+            - typed-literal
+        value:
+          type: string
+          description: The value of the RDF term
+        xml:lang:
+          type: string
+          description: >-
+            Language tag for language-tagged literals (e.g., "en", "fr").
+            Present only when type is "literal".
+        datatype:
+          type: string
+          format: uri
+          description: >-
+            Datatype IRI for typed literals. Present when type is
+            "typed-literal" or "literal" with a datatype.
+  responses:
+    MalformedQuery:
+      description: >-
+        The SPARQL query or update string is syntactically invalid
+        or malformed.
+      content:
+        text/plain:
+          schema:
+            type: string
+            description: Error message describing the syntax issue
+    QueryExecutionFailure:
+      description: >-
+        The server encountered an error while executing the query
+        or update operation.
+      content:
+        text/plain:
+          schema:
+            type: string
+            description: Error message describing the execution failure

@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.w3.org/TR/sparql11-results-json/sparql-results.json",
+  "title": "SPARQL Query Results JSON Format",
+  "description": "JSON Schema for the SPARQL 1.1 Query Results JSON Format as defined by the W3C Recommendation. Covers SELECT query results with variable bindings and ASK query boolean results.",
+  "$defs": {
+    "SelectResults": {
+      "type": "object",
+      "title": "SPARQL SELECT Results",
+      "description": "Results of a SPARQL SELECT query containing a head with variable names and a results object with an array of bindings.",
+      "required": ["head", "results"],
+      "properties": {
+        "head": {
+          "$ref": "#/$defs/Head"
+        },
+        "results": {
+          "$ref": "#/$defs/Results"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AskResult": {
+      "type": "object",
+      "title": "SPARQL ASK Result",
+      "description": "Result of a SPARQL ASK query containing a head and a boolean value indicating whether the query pattern matches.",
+      "required": ["head", "boolean"],
+      "properties": {
+        "head": {
+          "$ref": "#/$defs/Head"
+        },
+        "boolean": {
+          "type": "boolean",
+          "description": "True if the query pattern has at least one solution, false otherwise."
+        }
+      },
+      "additionalProperties": false
+    },
+    "Head": {
+      "type": "object",
+      "title": "Results Head",
+      "description": "Header section of the SPARQL results containing variable names and optional metadata links.",
+      "properties": {
+        "vars": {
+          "type": "array",
+          "description": "Ordered list of variable names (without the leading '?') from the SELECT clause.",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+          }
+        },
+        "link": {
+          "type": "array",
+          "description": "Array of URIs providing additional metadata about the results.",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      }
+    },
+    "Results": {
+      "type": "object",
+      "title": "Results Body",
+      "description": "Contains the array of solution bindings for a SELECT query.",
+      "required": ["bindings"],
+      "properties": {
+        "bindings": {
+          "type": "array",
+          "description": "Array of solution mappings. Each element maps variable names to RDF term descriptions.",
+          "items": {
+            "$ref": "#/$defs/Binding"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Binding": {
+      "type": "object",
+      "title": "Solution Binding",
+      "description": "A single query solution mapping variable names to their bound RDF term values. Variables with no binding for a given solution are omitted.",
+      "additionalProperties": {
+        "$ref": "#/$defs/RdfTerm"
+      }
+    },
+    "RdfTerm": {
+      "title": "RDF Term",
+      "description": "An RDF term value in the SPARQL results, representing an IRI, literal, or blank node.",
+      "oneOf": [
+        { "$ref": "#/$defs/IriTerm" },
+        { "$ref": "#/$defs/LiteralTerm" },
+        { "$ref": "#/$defs/BlankNodeTerm" }
+      ]
+    },
+    "IriTerm": {
+      "type": "object",
+      "title": "IRI Term",
+      "description": "An RDF IRI (Internationalized Resource Identifier) reference.",
+      "required": ["type", "value"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "uri",
+          "description": "Indicates this term is an IRI."
+        },
+        "value": {
+          "type": "string",
+          "format": "uri",
+          "description": "The IRI value."
+        }
+      },
+      "additionalProperties": false
+    },
+    "LiteralTerm": {
+      "type": "object",
+      "title": "Literal Term",
+      "description": "An RDF literal value, optionally with a language tag or datatype IRI.",
+      "required": ["type", "value"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["literal", "typed-literal"],
+          "description": "Indicates this term is a literal. 'typed-literal' is used for backward compatibility."
+        },
+        "value": {
+          "type": "string",
+          "description": "The lexical form of the literal."
+        },
+        "xml:lang": {
+          "type": "string",
+          "description": "Language tag (BCP 47) for language-tagged literals.",
+          "pattern": "^[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*$"
+        },
+        "datatype": {
+          "type": "string",
+          "format": "uri",
+          "description": "Datatype IRI for typed literals (e.g., xsd:integer, xsd:dateTime)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "BlankNodeTerm": {
+      "type": "object",
+      "title": "Blank Node Term",
+      "description": "An RDF blank node with a locally-scoped identifier.",
+      "required": ["type", "value"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "bnode",
+          "description": "Indicates this term is a blank node."
+        },
+        "value": {
+          "type": "string",
+          "description": "A blank node identifier, scoped to the results document."
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "oneOf": [
+    { "$ref": "#/$defs/SelectResults" },
+    { "$ref": "#/$defs/AskResult" }
+  ]
+}
