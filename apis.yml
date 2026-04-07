@@ -7,12 +7,12 @@ description: >-
   Store HTTP Protocol for managing RDF graphs.
 url: https://www.w3.org/TR/sparql11-overview/
 tags:
-  - SPARQL
-  - RDF
-  - Query Language
-  - W3C
   - Linked Data
+  - Query Language
+  - RDF
   - Semantic Web
+  - SPARQL
+  - W3C
 created: '2025'
 modified: '2026-03-16'
 apis:
@@ -26,11 +26,11 @@ apis:
     baseURL: https://dbpedia.org/sparql
     version: '1.1'
     tags:
-      - SPARQL
-      - Query
-      - Update
       - Graph Store
+      - Query
       - RDF
+      - SPARQL
+      - Update
     properties:
       - type: x-openapi
         url: openapi.yml

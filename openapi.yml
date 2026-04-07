@@ -73,6 +73,8 @@ paths:
           $ref: '#/components/responses/MalformedQuery'
         '500':
           $ref: '#/components/responses/QueryExecutionFailure'
+      tags:
+        - Sparql
     post:
       operationId: sparqlQueryPost
       summary: Execute SPARQL Query via POST
@@ -137,6 +139,8 @@ paths:
           $ref: '#/components/responses/MalformedQuery'
         '500':
           $ref: '#/components/responses/QueryExecutionFailure'
+      tags:
+        - Sparql
   /sparql-update:
     post:
       operationId: sparqlUpdate
@@ -197,6 +201,8 @@ paths:
           $ref: '#/components/responses/MalformedQuery'
         '500':
           $ref: '#/components/responses/QueryExecutionFailure'
+      tags:
+        - Sparql Update
   /sparql-graph:
     get:
       operationId: graphStoreGet
@@ -245,6 +251,8 @@ paths:
                 type: object
         '404':
           description: Named graph not found
+      tags:
+        - Sparql Graph
     put:
       operationId: graphStorePut
       summary: SPARQL Replace Graph (Graph Store Protocol)
@@ -284,6 +292,8 @@ paths:
           description: Graph replaced successfully (no content)
         '400':
           description: Malformed RDF payload
+      tags:
+        - Sparql Graph
     post:
       operationId: graphStorePost
       summary: SPARQL Merge into Graph (Graph Store Protocol)
@@ -321,6 +331,8 @@ paths:
           description: Triples merged successfully (no content)
         '400':
           description: Malformed RDF payload
+      tags:
+        - Sparql Graph
     delete:
       operationId: graphStoreDelete
       summary: SPARQL Delete Graph (Graph Store Protocol)
@@ -344,6 +356,8 @@ paths:
           description: Graph deleted successfully (no content)
         '404':
           description: Named graph not found
+      tags:
+        - Sparql Graph
 components:
   parameters:
     DefaultGraphUri:
@@ -485,3 +499,7 @@ components:
           schema:
             type: string
             description: Error message describing the execution failure
+tags:
+  - name: Sparql
+  - name: Sparql Graph
+  - name: Sparql Update
