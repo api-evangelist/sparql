@@ -200,7 +200,7 @@ paths:
   /sparql-graph:
     get:
       operationId: graphStoreGet
-      summary: Retrieve Graph (Graph Store Protocol)
+      summary: SPARQL Retrieve Graph (Graph Store Protocol)
       description: >-
         Retrieves an RDF graph from the SPARQL Graph Store using HTTP GET.
         Part of the SPARQL 1.1 Graph Store HTTP Protocol for managing
@@ -247,7 +247,7 @@ paths:
           description: Named graph not found
     put:
       operationId: graphStorePut
-      summary: Replace Graph (Graph Store Protocol)
+      summary: SPARQL Replace Graph (Graph Store Protocol)
       description: >-
         Replaces the contents of a graph with the provided RDF data.
         Creates the graph if it does not exist.
@@ -286,7 +286,7 @@ paths:
           description: Malformed RDF payload
     post:
       operationId: graphStorePost
-      summary: Merge into Graph (Graph Store Protocol)
+      summary: SPARQL Merge into Graph (Graph Store Protocol)
       description: >-
         Merges the provided RDF data into the specified graph,
         adding triples without removing existing ones.
@@ -323,7 +323,7 @@ paths:
           description: Malformed RDF payload
     delete:
       operationId: graphStoreDelete
-      summary: Delete Graph (Graph Store Protocol)
+      summary: SPARQL Delete Graph (Graph Store Protocol)
       description: Deletes a named graph or clears the default graph.
       parameters:
         - name: graph
