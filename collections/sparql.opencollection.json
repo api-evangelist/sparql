@@ -1,0 +1,143 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SPARQL 1.1 Protocol",
+    "version": "1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Query",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Execute a SPARQL query via GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dbpedia.org/sparql",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "query",
+                "value": "SELECT * WHERE { ?s ?p ?o } LIMIT 10",
+                "type": "query",
+                "description": "A SPARQL query string, percent-encoded"
+              },
+              {
+                "name": "default-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "IRI of a graph to include in the default graph (repeatable)"
+              },
+              {
+                "name": "named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "IRI of a graph to include as a named graph (repeatable)"
+              }
+            ]
+          },
+          "docs": "Executes a SPARQL query passed as the `query` URL parameter. The\nquery string MUST be percent-encoded. Optional `default-graph-uri`\nand `named-graph-uri` parameters may be repeated to specify the\nRDF dataset against which the query is evaluated.\n"
+        },
+        {
+          "info": {
+            "name": "Execute a SPARQL query via POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dbpedia.org/sparql",
+            "params": [
+              {
+                "name": "default-graph-uri",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "named-graph-uri",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "query",
+                  "value": ""
+                },
+                {
+                  "name": "default-graph-uri",
+                  "value": ""
+                },
+                {
+                  "name": "named-graph-uri",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Executes a SPARQL query via POST. Two encodings are defined by the\nSPARQL 1.1 Protocol:\n\n* `application/x-www-form-urlencoded` — the body carries the same\n  parameters as the GET variant (`query`, `default-graph-uri`,\n  `named-graph-uri`).\n* `application/sparql-query` — the body IS the SPARQL query string,\n  in UTF-8, and `default-graph-uri` / `named-graph-uri` may still\n  appear in the URL query string.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Update",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Execute a SPARQL update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dbpedia.org/sparql/update",
+            "params": [
+              {
+                "name": "using-graph-uri",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "using-named-graph-uri",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "update",
+                  "value": ""
+                },
+                {
+                  "name": "using-graph-uri",
+                  "value": ""
+                },
+                {
+                  "name": "using-named-graph-uri",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Executes a SPARQL update. Two encodings are defined by the SPARQL 1.1\nProtocol:\n\n* `application/x-www-form-urlencoded` — the body carries the\n  `update`, `using-graph-uri`, and `using-named-graph-uri`\n  parameters.\n* `application/sparql-update` — the body IS the SPARQL update\n  string, in UTF-8.\n\nMany implementations expose update on a distinct path (e.g.\n`/sparql/update`) or require authentication; this is\nimplementation-defined.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
