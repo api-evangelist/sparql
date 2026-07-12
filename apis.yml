@@ -52,3 +52,6 @@ apis:
       - type: x-github
         url: https://github.com/w3c/sparql-query
 common: []
+common:
+- type: DomainSecurity
+  url: security/sparql-domain-security.yml
