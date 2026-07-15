@@ -53,5 +53,7 @@ apis:
         url: https://github.com/w3c/sparql-query
 common: []
 common:
+- type: AgenticAccess
+  url: agentic-access/sparql-agentic-access.yml
 - type: DomainSecurity
   url: security/sparql-domain-security.yml
