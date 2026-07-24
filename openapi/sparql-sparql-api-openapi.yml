@@ -1,0 +1,273 @@
+openapi: 3.1.0
+info:
+  title: 1.1 Protocol Query Sparql API
+  description: 'SPARQL 1.1 Protocol is a W3C Recommendation that defines how to convey
+
+    SPARQL queries and updates between clients and SPARQL processors over
+
+    HTTP. It defines two operations — `query` and `update` — each of which
+
+    can be invoked over HTTP with several encodings of the SPARQL string.
+
+
+    This OpenAPI description models only the protocol operations explicitly
+
+    defined in https://www.w3.org/TR/sparql11-protocol/. It does not model
+
+    any vendor-specific authentication scheme; the spec leaves authentication
+
+    to implementations ("implementations may choose to use HTTP authentication
+
+    mechanisms or other implementation-defined mechanisms"). The example
+
+    server is the public DBpedia SPARQL endpoint which accepts query
+
+    requests without authentication.
+
+
+    The Graph Store HTTP Protocol (a sibling specification at
+
+    https://www.w3.org/TR/sparql11-http-rdf-update/) is not modeled here.
+
+    '
+  version: '1.1'
+  contact:
+    name: W3C SPARQL Working Group
+    url: https://www.w3.org/TR/sparql11-protocol/
+  license:
+    name: W3C Document License
+    url: https://www.w3.org/Consortium/Legal/2015/doc-license
+servers:
+- url: https://dbpedia.org
+  description: Public DBpedia SPARQL endpoint (no auth)
+- url: https://{host}
+  description: Generic SPARQL 1.1 endpoint
+  variables:
+    host:
+      default: example.org
+      description: Hostname of a SPARQL 1.1 endpoint
+tags:
+- name: Sparql
+paths:
+  /sparql:
+    get:
+      operationId: sparqlQueryGet
+      summary: Execute SPARQL Query via GET
+      description: Executes a SPARQL query operation using HTTP GET. The query string is passed as a URL parameter. This method is suitable for queries that fit within URL length limits. Supports SELECT, ASK, CONSTRUCT, and DESCRIBE query forms.
+      parameters:
+      - name: query
+        in: query
+        required: true
+        description: The SPARQL query string to execute
+        schema:
+          type: string
+        example: SELECT ?s ?p ?o WHERE { ?s ?p ?o } LIMIT 10
+      - $ref: '#/components/parameters/DefaultGraphUri'
+      - $ref: '#/components/parameters/NamedGraphUri'
+      - $ref: '#/components/parameters/Timeout'
+      - $ref: '#/components/parameters/AcceptQuery'
+      responses:
+        '200':
+          description: Query executed successfully
+          content:
+            application/sparql-results+json:
+              schema:
+                $ref: '#/components/schemas/SparqlResultsJson'
+            application/sparql-results+xml:
+              schema:
+                type: string
+                description: SPARQL Query Results XML Format
+            text/turtle:
+              schema:
+                type: string
+                description: RDF graph serialized as Turtle (CONSTRUCT/DESCRIBE)
+            application/rdf+xml:
+              schema:
+                type: string
+                description: RDF graph serialized as RDF/XML (CONSTRUCT/DESCRIBE)
+            application/ld+json:
+              schema:
+                type: object
+                description: RDF graph serialized as JSON-LD (CONSTRUCT/DESCRIBE)
+        '400':
+          $ref: '#/components/responses/MalformedQuery'
+        '500':
+          $ref: '#/components/responses/QueryExecutionFailure'
+      tags:
+      - Sparql
+    post:
+      operationId: sparqlQueryPost
+      summary: Execute SPARQL Query via POST
+      description: Executes a SPARQL query operation using HTTP POST. The query can be sent as a URL-encoded form parameter or directly in the request body. This method supports arbitrarily long queries that may exceed URL length limits.
+      parameters:
+      - $ref: '#/components/parameters/DefaultGraphUri'
+      - $ref: '#/components/parameters/NamedGraphUri'
+      - $ref: '#/components/parameters/Timeout'
+      - $ref: '#/components/parameters/AcceptQuery'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - query
+              properties:
+                query:
+                  type: string
+                  description: The SPARQL query string
+                default-graph-uri:
+                  type: string
+                  description: Default graph URI (alternative to query parameter)
+                named-graph-uri:
+                  type: string
+                  description: Named graph URI (alternative to query parameter)
+          application/sparql-query:
+            schema:
+              type: string
+              description: The SPARQL query string sent directly as the request body with Content-Type application/sparql-query.
+      responses:
+        '200':
+          description: Query executed successfully
+          content:
+            application/sparql-results+json:
+              schema:
+                $ref: '#/components/schemas/SparqlResultsJson'
+            application/sparql-results+xml:
+              schema:
+                type: string
+                description: SPARQL Query Results XML Format
+            text/turtle:
+              schema:
+                type: string
+                description: RDF graph serialized as Turtle (CONSTRUCT/DESCRIBE)
+            application/rdf+xml:
+              schema:
+                type: string
+                description: RDF graph serialized as RDF/XML (CONSTRUCT/DESCRIBE)
+            application/ld+json:
+              schema:
+                type: object
+                description: RDF graph serialized as JSON-LD (CONSTRUCT/DESCRIBE)
+        '400':
+          $ref: '#/components/responses/MalformedQuery'
+        '500':
+          $ref: '#/components/responses/QueryExecutionFailure'
+      tags:
+      - Sparql
+components:
+  parameters:
+    Timeout:
+      name: timeout
+      in: query
+      description: Maximum execution time for the query in milliseconds. Not part of the W3C specification but commonly supported by SPARQL endpoints.
+      schema:
+        type: integer
+        minimum: 0
+    NamedGraphUri:
+      name: named-graph-uri
+      in: query
+      description: Specifies a named graph for the query dataset. Multiple values may be provided.
+      schema:
+        type: string
+        format: uri
+      style: form
+      explode: true
+    AcceptQuery:
+      name: Accept
+      in: header
+      description: Desired response content type
+      schema:
+        type: string
+        enum:
+        - application/sparql-results+json
+        - application/sparql-results+xml
+        - text/turtle
+        - application/rdf+xml
+        - application/ld+json
+        - text/csv
+        - text/tab-separated-values
+        default: application/sparql-results+json
+    DefaultGraphUri:
+      name: default-graph-uri
+      in: query
+      description: Specifies the default graph for the query. Multiple values may be provided to define a dataset with a merged default graph.
+      schema:
+        type: string
+        format: uri
+      style: form
+      explode: true
+  responses:
+    QueryExecutionFailure:
+      description: The server encountered an error while executing the query or update operation.
+      content:
+        text/plain:
+          schema:
+            type: string
+            description: Error message describing the execution failure
+    MalformedQuery:
+      description: The SPARQL query or update string is syntactically invalid or malformed.
+      content:
+        text/plain:
+          schema:
+            type: string
+            description: Error message describing the syntax issue
+  schemas:
+    RdfTerm:
+      type: object
+      description: Represents an RDF term (IRI, literal, or blank node) in the SPARQL Results JSON format.
+      required:
+      - type
+      - value
+      properties:
+        type:
+          type: string
+          description: The type of the RDF term
+          enum:
+          - uri
+          - literal
+          - bnode
+          - typed-literal
+        value:
+          type: string
+          description: The value of the RDF term
+        xml:lang:
+          type: string
+          description: Language tag for language-tagged literals (e.g., "en", "fr"). Present only when type is "literal".
+        datatype:
+          type: string
+          format: uri
+          description: Datatype IRI for typed literals. Present when type is "typed-literal" or "literal" with a datatype.
+    SparqlResultsJson:
+      type: object
+      description: SPARQL Query Results JSON Format as defined by W3C. Used for SELECT and ASK query results.
+      properties:
+        head:
+          type: object
+          description: Header information for the query results
+          properties:
+            vars:
+              type: array
+              description: Ordered list of variable names from the SELECT clause. Present for SELECT results.
+              items:
+                type: string
+            link:
+              type: array
+              description: Links to additional metadata
+              items:
+                type: string
+                format: uri
+        results:
+          type: object
+          description: Contains the result bindings for SELECT queries.
+          properties:
+            bindings:
+              type: array
+              description: Array of result solutions. Each binding is an object mapping variable names to RDF term objects.
+              items:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/RdfTerm'
+        boolean:
+          type: boolean
+          description: Result of an ASK query. Present instead of results for ASK query forms.

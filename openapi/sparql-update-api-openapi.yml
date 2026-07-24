@@ -1,0 +1,116 @@
+openapi: 3.1.0
+info:
+  title: SPARQL 1.1 Protocol Query Update API
+  description: 'SPARQL 1.1 Protocol is a W3C Recommendation that defines how to convey
+
+    SPARQL queries and updates between clients and SPARQL processors over
+
+    HTTP. It defines two operations — `query` and `update` — each of which
+
+    can be invoked over HTTP with several encodings of the SPARQL string.
+
+
+    This OpenAPI description models only the protocol operations explicitly
+
+    defined in https://www.w3.org/TR/sparql11-protocol/. It does not model
+
+    any vendor-specific authentication scheme; the spec leaves authentication
+
+    to implementations ("implementations may choose to use HTTP authentication
+
+    mechanisms or other implementation-defined mechanisms"). The example
+
+    server is the public DBpedia SPARQL endpoint which accepts query
+
+    requests without authentication.
+
+
+    The Graph Store HTTP Protocol (a sibling specification at
+
+    https://www.w3.org/TR/sparql11-http-rdf-update/) is not modeled here.
+
+    '
+  version: '1.1'
+  contact:
+    name: W3C SPARQL Working Group
+    url: https://www.w3.org/TR/sparql11-protocol/
+  license:
+    name: W3C Document License
+    url: https://www.w3.org/Consortium/Legal/2015/doc-license
+servers:
+- url: https://dbpedia.org
+  description: Public DBpedia SPARQL endpoint (no auth)
+- url: https://{host}
+  description: Generic SPARQL 1.1 endpoint
+  variables:
+    host:
+      default: example.org
+      description: Hostname of a SPARQL 1.1 endpoint
+tags:
+- name: Update
+  description: SPARQL update operation
+paths:
+  /sparql/update:
+    post:
+      tags:
+      - Update
+      summary: Execute a SPARQL update
+      description: "Executes a SPARQL update. Two encodings are defined by the SPARQL 1.1\nProtocol:\n\n* `application/x-www-form-urlencoded` — the body carries the\n  `update`, `using-graph-uri`, and `using-named-graph-uri`\n  parameters.\n* `application/sparql-update` — the body IS the SPARQL update\n  string, in UTF-8.\n\nMany implementations expose update on a distinct path (e.g.\n`/sparql/update`) or require authentication; this is\nimplementation-defined.\n"
+      operationId: update
+      parameters:
+      - name: using-graph-uri
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            format: uri
+        style: form
+        explode: true
+      - name: using-named-graph-uri
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            format: uri
+        style: form
+        explode: true
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - update
+              properties:
+                update:
+                  type: string
+                  description: SPARQL update string
+                using-graph-uri:
+                  type: array
+                  items:
+                    type: string
+                    format: uri
+                using-named-graph-uri:
+                  type: array
+                  items:
+                    type: string
+                    format: uri
+          application/sparql-update:
+            schema:
+              type: string
+              description: SPARQL update string (UTF-8)
+            example: INSERT DATA { <urn:s> <urn:p> "o" }
+      responses:
+        '200':
+          description: Update successful
+        '204':
+          description: Update successful, no content
+        '400':
+          description: Malformed update
+        '401':
+          description: Update refused (authentication required)
