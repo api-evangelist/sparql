@@ -1,3 +1,16 @@
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/sparql.png
 name: SPARQL
 description: >-
   SPARQL (SPARQL Protocol and RDF Query Language) is a W3C Recommendation that provides
@@ -16,41 +29,90 @@ tags:
 created: '2025'
 modified: '2026-03-16'
 apis:
-  - name: SPARQL Protocol API
-    description: >-
-      Standard SPARQL 1.1 Protocol HTTP endpoints for executing queries and
-      updates against RDF datasets, plus the Graph Store HTTP Protocol for
-      direct management of named graphs and the default graph, as defined
-      by the W3C Recommendation.
-    humanURL: https://www.w3.org/TR/sparql11-protocol/
-    baseURL: https://dbpedia.org/sparql
-    version: '1.1'
-    tags:
-      - Graph Store
-      - Query
-      - RDF
-      - SPARQL
-      - Update
-    properties:
-      - type: x-openapi
-        url: openapi.yml
-      - type: x-json-schema
-        url: json-schema.json
-      - type: x-json-ld-context
-        url: json-ld-context.jsonld
-      - type: x-documentation
-        url: https://www.w3.org/TR/sparql11-overview/
-      - type: x-specification
-        url: https://www.w3.org/TR/sparql11-protocol/
-      - type: x-specification
-        url: https://www.w3.org/TR/sparql11-query/
-      - type: x-specification
-        url: https://www.w3.org/TR/sparql11-results-json/
-    contact:
-      - type: x-website
-        url: https://www.w3.org/
-      - type: x-github
-        url: https://github.com/w3c/sparql-query
+- name: SPARQL Protocol API
+  description: >-
+    Standard SPARQL 1.1 Protocol HTTP endpoints for executing queries and updates against RDF datasets,
+    plus the Graph Store HTTP Protocol for direct management of named graphs and the default graph, as
+    defined by the W3C Recommendation.
+  humanURL: https://www.w3.org/TR/sparql11-protocol/
+  baseURL: https://dbpedia.org/sparql
+  version: '1.1'
+  tags:
+  - Graph Store
+  - Query
+  - RDF
+  - SPARQL
+  - Update
+  properties:
+  - type: x-openapi
+    url: openapi.yml
+  - type: x-json-schema
+    url: json-schema.json
+  - type: x-json-ld-context
+    url: json-ld-context.jsonld
+  - type: x-documentation
+    url: https://www.w3.org/TR/sparql11-overview/
+  - type: x-specification
+    url: https://www.w3.org/TR/sparql11-protocol/
+  - type: x-specification
+    url: https://www.w3.org/TR/sparql11-query/
+  - type: x-specification
+    url: https://www.w3.org/TR/sparql11-results-json/
+  contact:
+  - type: x-website
+    url: https://www.w3.org/
+  - type: x-github
+    url: https://github.com/w3c/sparql-query
+- aid: sparql:sparql-query-api
+  name: SPARQL Query API
+  description: SPARQL query operation
+  humanURL: https://www.w3.org/TR/sparql11-protocol/
+  baseURL: https://dbpedia.org/sparql
+  tags:
+  - Query
+  properties:
+  - type: OpenAPI
+    url: openapi/sparql-query-api-openapi.yml
+- aid: sparql:sparql-sparql-api
+  name: SPARQL Sparql API
+  description: The Sparql API from SPARQL — 1 operation(s) for sparql.
+  humanURL: https://www.w3.org/TR/sparql11-protocol/
+  baseURL: https://dbpedia.org/sparql
+  tags:
+  - Sparql
+  properties:
+  - type: OpenAPI
+    url: openapi/sparql-sparql-api-openapi.yml
+- aid: sparql:sparql-sparql-graph-api
+  name: SPARQL Sparql Graph API
+  description: The Sparql Graph API from SPARQL — 1 operation(s) for sparql graph.
+  humanURL: https://www.w3.org/TR/sparql11-protocol/
+  baseURL: https://dbpedia.org/sparql
+  tags:
+  - Sparql Graph
+  properties:
+  - type: OpenAPI
+    url: openapi/sparql-sparql-graph-api-openapi.yml
+- aid: sparql:sparql-sparql-update-api
+  name: SPARQL Sparql Update API
+  description: The Sparql Update API from SPARQL — 1 operation(s) for sparql update.
+  humanURL: https://www.w3.org/TR/sparql11-protocol/
+  baseURL: https://dbpedia.org/sparql
+  tags:
+  - Sparql Update
+  properties:
+  - type: OpenAPI
+    url: openapi/sparql-sparql-update-api-openapi.yml
+- aid: sparql:sparql-update-api
+  name: SPARQL Update API
+  description: SPARQL update operation
+  humanURL: https://www.w3.org/TR/sparql11-protocol/
+  baseURL: https://dbpedia.org/sparql
+  tags:
+  - Update
+  properties:
+  - type: OpenAPI
+    url: openapi/sparql-update-api-openapi.yml
 common: []
 common:
 - type: AgenticAccess
