@@ -45,7 +45,7 @@ apis:
   - Update
   properties:
   - type: x-openapi
-    url: openapi.yml
+    url: openapi/_original/openapi.yml
   - type: x-json-schema
     url: json-schema.json
   - type: x-json-ld-context
