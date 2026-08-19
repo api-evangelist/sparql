@@ -1,0 +1,723 @@
+{
+  "item": [
+    {
+      "id": "d99190e8-ea02-4621-b3a7-456e640b3b2e",
+      "name": "Sparql Graph",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "07fbf923-c678-4e5a-81f5-3caf2c8b3680",
+          "name": "SPARQL Retrieve Graph (Graph Store Protocol)",
+          "request": {
+            "name": "SPARQL Retrieve Graph (Graph Store Protocol)",
+            "description": {
+              "content": "Retrieves an RDF graph from the SPARQL Graph Store using HTTP GET. Part of the SPARQL 1.1 Graph Store HTTP Protocol for managing named graphs and the default graph.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sparql-graph"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "graph",
+                  "value": "<uri>",
+                  "description": "URI of the named graph to retrieve. If omitted, the default graph is returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "default",
+                  "value": "<string>",
+                  "description": "Set to empty string to request the default graph"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/turtle"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "96ae8412-76fc-4bff-abd2-7261784e4e99",
+              "name": "Graph returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sparql-graph"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "graph",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "default",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "text/turtle",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/turtle"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/ld+json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0aa1a585-dc61-4ead-b8b7-b7994c67aa3e",
+              "name": "Named graph not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sparql-graph"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "graph",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "default",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "text/turtle",
+                    "description": ""
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "96226fbe-89f1-4d74-9b13-7c944bc27d60",
+          "name": "SPARQL Replace Graph (Graph Store Protocol)",
+          "request": {
+            "name": "SPARQL Replace Graph (Graph Store Protocol)",
+            "description": {
+              "content": "Replaces the contents of a graph with the provided RDF data. Creates the graph if it does not exist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sparql-graph"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "graph",
+                  "value": "<uri>",
+                  "description": "URI of the named graph to replace"
+                },
+                {
+                  "disabled": false,
+                  "key": "default",
+                  "value": "<string>",
+                  "description": "Set to empty string to target the default graph"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/turtle"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<string>"
+            }
+          },
+          "response": [
+            {
+              "id": "dfda2487-0dec-43c4-b15e-38a621062363",
+              "name": "Graph replaced successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sparql-graph"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "graph",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "default",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2c2d5a2c-6c1e-4213-b1fa-d4b29251fb20",
+              "name": "Graph created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sparql-graph"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "graph",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "default",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>"
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "53716b30-1208-457b-b864-76c6314f7c93",
+              "name": "Graph replaced successfully (no content)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sparql-graph"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "graph",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "default",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>"
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6b64d380-1151-4b26-a987-ced66a2f5f04",
+              "name": "Malformed RDF payload",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sparql-graph"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "graph",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "default",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b4de0bc2-e345-401a-ad16-fae464f8f039",
+          "name": "SPARQL Merge into Graph (Graph Store Protocol)",
+          "request": {
+            "name": "SPARQL Merge into Graph (Graph Store Protocol)",
+            "description": {
+              "content": "Merges the provided RDF data into the specified graph, adding triples without removing existing ones.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sparql-graph"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "graph",
+                  "value": "<uri>",
+                  "description": "URI of the named graph to merge into"
+                },
+                {
+                  "disabled": false,
+                  "key": "default",
+                  "value": "<string>",
+                  "description": "Set to empty string to target the default graph"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/turtle"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<string>"
+            }
+          },
+          "response": [
+            {
+              "id": "65b428e4-0044-43e1-a63c-378a6ccce0cf",
+              "name": "Triples merged successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sparql-graph"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "graph",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "default",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c9725217-0683-4c90-b77c-76b03f9203d7",
+              "name": "Triples merged successfully (no content)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sparql-graph"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "graph",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "default",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>"
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aca8be5c-c591-49a6-af05-be3d8f7c179d",
+              "name": "Malformed RDF payload",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sparql-graph"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "graph",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "default",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b10a7e46-5e59-4ab9-ad91-5f3426a06d5c",
+          "name": "SPARQL Delete Graph (Graph Store Protocol)",
+          "request": {
+            "name": "SPARQL Delete Graph (Graph Store Protocol)",
+            "description": {
+              "content": "Deletes a named graph or clears the default graph.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sparql-graph"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "graph",
+                  "value": "<uri>",
+                  "description": "URI of the named graph to delete"
+                },
+                {
+                  "disabled": false,
+                  "key": "default",
+                  "value": "<string>",
+                  "description": "Set to empty string to clear the default graph"
+                }
+              ],
+              "variable": []
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2d9a0722-74eb-4fba-8079-a0a35678d230",
+              "name": "Graph deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sparql-graph"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "graph",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "default",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5ba05459-52f6-44a4-b501-3ceda77ce588",
+              "name": "Graph deleted successfully (no content)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sparql-graph"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "graph",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "default",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "adc739a0-dbe3-44d4-b1b3-18d698bc3300",
+              "name": "Named graph not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sparql-graph"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "graph",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "default",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://dbpedia.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "974240c6-19ca-4c92-a281-dc3e347dc68c",
+    "name": "SPARQL 1.1 Protocol Query Sparql Graph API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "SPARQL 1.1 Protocol is a W3C Recommendation that defines how to convey\nSPARQL queries and updates between clients and SPARQL processors over\nHTTP. It defines two operations — `query` and `update` — each of which\ncan be invoked over HTTP with several encodings of the SPARQL string.\n\nThis OpenAPI description models only the protocol operations explicitly\ndefined in https://www.w3.org/TR/sparql11-protocol/. It does not model\nany vendor-specific authentication scheme; the spec leaves authentication\nto implementations (\"implementations may choose to use HTTP authentication\nmechanisms or other implementation-defined mechanisms\"). The example\nserver is the public DBpedia SPARQL endpoint which accepts query\nrequests without authentication.\n\nThe Graph Store HTTP Protocol (a sibling specification at\nhttps://www.w3.org/TR/sparql11-http-rdf-update/) is not modeled here.\n\n\nContact Support:\n Name: W3C SPARQL Working Group",
+      "type": "text/plain"
+    }
+  }
+}

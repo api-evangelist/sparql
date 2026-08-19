@@ -1,0 +1,124 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SPARQL 1.1 Protocol Query Sparql Graph API",
+    "version": "1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sparql Graph",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SPARQL Retrieve Graph (Graph Store Protocol)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dbpedia.org/sparql-graph",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "graph",
+                "value": "",
+                "type": "query",
+                "description": "URI of the named graph to retrieve. If omitted, the default graph is returned."
+              },
+              {
+                "name": "default",
+                "value": "",
+                "type": "query",
+                "description": "Set to empty string to request the default graph"
+              }
+            ]
+          },
+          "docs": "Retrieves an RDF graph from the SPARQL Graph Store using HTTP GET. Part of the SPARQL 1.1 Graph Store HTTP Protocol for managing named graphs and the default graph."
+        },
+        {
+          "info": {
+            "name": "SPARQL Merge into Graph (Graph Store Protocol)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dbpedia.org/sparql-graph",
+            "params": [
+              {
+                "name": "graph",
+                "value": "",
+                "type": "query",
+                "description": "URI of the named graph to merge into"
+              },
+              {
+                "name": "default",
+                "value": "",
+                "type": "query",
+                "description": "Set to empty string to target the default graph"
+              }
+            ]
+          },
+          "docs": "Merges the provided RDF data into the specified graph, adding triples without removing existing ones."
+        },
+        {
+          "info": {
+            "name": "SPARQL Replace Graph (Graph Store Protocol)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://dbpedia.org/sparql-graph",
+            "params": [
+              {
+                "name": "graph",
+                "value": "",
+                "type": "query",
+                "description": "URI of the named graph to replace"
+              },
+              {
+                "name": "default",
+                "value": "",
+                "type": "query",
+                "description": "Set to empty string to target the default graph"
+              }
+            ]
+          },
+          "docs": "Replaces the contents of a graph with the provided RDF data. Creates the graph if it does not exist."
+        },
+        {
+          "info": {
+            "name": "SPARQL Delete Graph (Graph Store Protocol)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://dbpedia.org/sparql-graph",
+            "params": [
+              {
+                "name": "graph",
+                "value": "",
+                "type": "query",
+                "description": "URI of the named graph to delete"
+              },
+              {
+                "name": "default",
+                "value": "",
+                "type": "query",
+                "description": "Set to empty string to clear the default graph"
+              }
+            ]
+          },
+          "docs": "Deletes a named graph or clears the default graph."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

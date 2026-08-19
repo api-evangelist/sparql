@@ -1,0 +1,115 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1.1 Protocol Query Sparql API",
+    "version": "1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sparql",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Execute SPARQL Query via GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dbpedia.org/sparql",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "query",
+                "value": "SELECT ?s ?p ?o WHERE { ?s ?p ?o } LIMIT 10",
+                "type": "query",
+                "description": "The SPARQL query string to execute"
+              },
+              {
+                "name": "default-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the default graph for the query. Multiple values may be provided to define a dataset with a merged default graph."
+              },
+              {
+                "name": "named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a named graph for the query dataset. Multiple values may be provided."
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Maximum execution time for the query in milliseconds. Not part of the W3C specification but commonly supported by SPARQL endpoints."
+              }
+            ]
+          },
+          "docs": "Executes a SPARQL query operation using HTTP GET. The query string is passed as a URL parameter. This method is suitable for queries that fit within URL length limits. Supports SELECT, ASK, CONSTRUCT, and DESCRIBE query forms."
+        },
+        {
+          "info": {
+            "name": "Execute SPARQL Query via POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dbpedia.org/sparql",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "default-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the default graph for the query. Multiple values may be provided to define a dataset with a merged default graph."
+              },
+              {
+                "name": "named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a named graph for the query dataset. Multiple values may be provided."
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "Maximum execution time for the query in milliseconds. Not part of the W3C specification but commonly supported by SPARQL endpoints."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "query",
+                  "value": ""
+                },
+                {
+                  "name": "default-graph-uri",
+                  "value": ""
+                },
+                {
+                  "name": "named-graph-uri",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Executes a SPARQL query operation using HTTP POST. The query can be sent as a URL-encoded form parameter or directly in the request body. This method supports arbitrarily long queries that may exceed URL length limits."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

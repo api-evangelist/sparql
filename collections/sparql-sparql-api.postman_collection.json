@@ -1,0 +1,602 @@
+{
+  "item": [
+    {
+      "id": "bd1ed01d-b8ef-4983-b5d3-0c9c81623ba3",
+      "name": "Sparql",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "daea630b-9f08-45db-8752-cc4bdb78afc3",
+          "name": "Execute SPARQL Query via GET",
+          "request": {
+            "name": "Execute SPARQL Query via GET",
+            "description": {
+              "content": "Executes a SPARQL query operation using HTTP GET. The query string is passed as a URL parameter. This method is suitable for queries that fit within URL length limits. Supports SELECT, ASK, CONSTRUCT, and DESCRIBE query forms.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sparql"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) The SPARQL query string to execute"
+                },
+                {
+                  "disabled": false,
+                  "key": "default-graph-uri",
+                  "value": "<uri>",
+                  "description": "Specifies the default graph for the query. Multiple values may be provided to define a dataset with a merged default graph."
+                },
+                {
+                  "disabled": false,
+                  "key": "named-graph-uri",
+                  "value": "<uri>",
+                  "description": "Specifies a named graph for the query dataset. Multiple values may be provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "timeout",
+                  "value": "<integer>",
+                  "description": "Maximum execution time for the query in milliseconds. Not part of the W3C specification but commonly supported by SPARQL endpoints."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sparql-results+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d99265d4-598e-4915-be0a-c4bb20743e59",
+              "name": "Query executed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sparql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "SELECT ?s ?p ?o WHERE { ?s ?p ?o } LIMIT 10"
+                    },
+                    {
+                      "key": "default-graph-uri",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "named-graph-uri",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Desired response content type",
+                    "key": "Accept",
+                    "value": "application/sparql-results+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/sparql-results+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sparql-results+json"
+                }
+              ],
+              "body": "{\n  \"head\": {\n    \"vars\": [\n      \"string\",\n      \"string\"\n    ],\n    \"link\": [\n      \"http://RWIkl.lsovJ,WI-qiSPwo9vbHj6LBSMFSal-.fSi4W0DEz0bsvgMqvvjiRjyX-R-7m\",\n      \"https://BAELLNphrMDyGOHGOBneSaNlBSGySDPnz.mbrnjK+xMWziNhtVn8vtg7-S2qr3eqCwaUIm8Gjg-MRLXK0hNBa\"\n    ]\n  },\n  \"results\": {\n    \"bindings\": [\n      {\n        \"key_0\": {\n          \"type\": \"literal\",\n          \"value\": \"string\",\n          \"xml:lang\": \"string\",\n          \"datatype\": \"https://gswSqdQBiOaInSMmwo.jykB81NM,pc+DxQzQ76GLb1OgRc6V\"\n        }\n      },\n      {\n        \"key_0\": {\n          \"type\": \"bnode\",\n          \"value\": \"string\",\n          \"xml:lang\": \"string\",\n          \"datatype\": \"http://MjLNlWoUUFwHpROJtpVDurfckJFSNo.qkwt4hVb13D4ClCgJ1bHgXw1GnkCrYDESZDXl5csZSmLMgLkQ8uJJPg93AZ5ER6DHFwJh\"\n        },\n        \"key_1\": {\n          \"type\": \"bnode\",\n          \"value\": \"string\",\n          \"xml:lang\": \"string\",\n          \"datatype\": \"http://ZDpyQRvU.qhsKh3ve2MfUrixBRsTTPzrvmzI5Kfk+VQde,X5PT\"\n        }\n      }\n    ]\n  },\n  \"boolean\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a576d2a-f26b-47d3-a377-0501e7861a6e",
+              "name": "The SPARQL query or update string is syntactically invalid or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sparql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "SELECT ?s ?p ?o WHERE { ?s ?p ?o } LIMIT 10"
+                    },
+                    {
+                      "key": "default-graph-uri",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "named-graph-uri",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Desired response content type",
+                    "key": "Accept",
+                    "value": "application/sparql-results+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "05ec63c7-8929-4c5f-b756-42ab38a56312",
+              "name": "The server encountered an error while executing the query or update operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sparql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "SELECT ?s ?p ?o WHERE { ?s ?p ?o } LIMIT 10"
+                    },
+                    {
+                      "key": "default-graph-uri",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "named-graph-uri",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Desired response content type",
+                    "key": "Accept",
+                    "value": "application/sparql-results+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a8c6dfc4-c181-40f5-a739-5f6ddb6d5b90",
+          "name": "Execute SPARQL Query via POST",
+          "request": {
+            "name": "Execute SPARQL Query via POST",
+            "description": {
+              "content": "Executes a SPARQL query operation using HTTP POST. The query can be sent as a URL-encoded form parameter or directly in the request body. This method supports arbitrarily long queries that may exceed URL length limits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sparql"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "default-graph-uri",
+                  "value": "<uri>",
+                  "description": "Specifies the default graph for the query. Multiple values may be provided to define a dataset with a merged default graph."
+                },
+                {
+                  "disabled": false,
+                  "key": "named-graph-uri",
+                  "value": "<uri>",
+                  "description": "Specifies a named graph for the query dataset. Multiple values may be provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "timeout",
+                  "value": "<integer>",
+                  "description": "Maximum execution time for the query in milliseconds. Not part of the W3C specification but commonly supported by SPARQL endpoints."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/sparql-results+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) The SPARQL query string"
+                },
+                {
+                  "disabled": false,
+                  "key": "default-graph-uri",
+                  "value": "<string>",
+                  "description": "Default graph URI (alternative to query parameter)"
+                },
+                {
+                  "disabled": false,
+                  "key": "named-graph-uri",
+                  "value": "<string>",
+                  "description": "Named graph URI (alternative to query parameter)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "537929f9-c5d8-4b7a-a0e8-23830b8cb227",
+              "name": "Query executed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sparql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "default-graph-uri",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "named-graph-uri",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Desired response content type",
+                    "key": "Accept",
+                    "value": "application/sparql-results+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/sparql-results+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The SPARQL query string",
+                        "type": "text/plain"
+                      },
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Default graph URI (alternative to query parameter)",
+                        "type": "text/plain"
+                      },
+                      "key": "default-graph-uri",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Named graph URI (alternative to query parameter)",
+                        "type": "text/plain"
+                      },
+                      "key": "named-graph-uri",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sparql-results+json"
+                }
+              ],
+              "body": "{\n  \"head\": {\n    \"vars\": [\n      \"string\",\n      \"string\"\n    ],\n    \"link\": [\n      \"http://RWIkl.lsovJ,WI-qiSPwo9vbHj6LBSMFSal-.fSi4W0DEz0bsvgMqvvjiRjyX-R-7m\",\n      \"https://BAELLNphrMDyGOHGOBneSaNlBSGySDPnz.mbrnjK+xMWziNhtVn8vtg7-S2qr3eqCwaUIm8Gjg-MRLXK0hNBa\"\n    ]\n  },\n  \"results\": {\n    \"bindings\": [\n      {\n        \"key_0\": {\n          \"type\": \"literal\",\n          \"value\": \"string\",\n          \"xml:lang\": \"string\",\n          \"datatype\": \"https://gswSqdQBiOaInSMmwo.jykB81NM,pc+DxQzQ76GLb1OgRc6V\"\n        }\n      },\n      {\n        \"key_0\": {\n          \"type\": \"bnode\",\n          \"value\": \"string\",\n          \"xml:lang\": \"string\",\n          \"datatype\": \"http://MjLNlWoUUFwHpROJtpVDurfckJFSNo.qkwt4hVb13D4ClCgJ1bHgXw1GnkCrYDESZDXl5csZSmLMgLkQ8uJJPg93AZ5ER6DHFwJh\"\n        },\n        \"key_1\": {\n          \"type\": \"bnode\",\n          \"value\": \"string\",\n          \"xml:lang\": \"string\",\n          \"datatype\": \"http://ZDpyQRvU.qhsKh3ve2MfUrixBRsTTPzrvmzI5Kfk+VQde,X5PT\"\n        }\n      }\n    ]\n  },\n  \"boolean\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1373ec94-327b-475b-a404-c024ac78002c",
+              "name": "The SPARQL query or update string is syntactically invalid or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sparql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "default-graph-uri",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "named-graph-uri",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Desired response content type",
+                    "key": "Accept",
+                    "value": "application/sparql-results+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The SPARQL query string",
+                        "type": "text/plain"
+                      },
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Default graph URI (alternative to query parameter)",
+                        "type": "text/plain"
+                      },
+                      "key": "default-graph-uri",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Named graph URI (alternative to query parameter)",
+                        "type": "text/plain"
+                      },
+                      "key": "named-graph-uri",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4624c6d6-9d55-40f8-8912-8be93940f60d",
+              "name": "The server encountered an error while executing the query or update operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sparql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "default-graph-uri",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "named-graph-uri",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Desired response content type",
+                    "key": "Accept",
+                    "value": "application/sparql-results+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The SPARQL query string",
+                        "type": "text/plain"
+                      },
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Default graph URI (alternative to query parameter)",
+                        "type": "text/plain"
+                      },
+                      "key": "default-graph-uri",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Named graph URI (alternative to query parameter)",
+                        "type": "text/plain"
+                      },
+                      "key": "named-graph-uri",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://dbpedia.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "724abdab-c007-4b3c-bafe-79afab53d6ec",
+    "name": "1.1 Protocol Query Sparql API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "SPARQL 1.1 Protocol is a W3C Recommendation that defines how to convey\nSPARQL queries and updates between clients and SPARQL processors over\nHTTP. It defines two operations — `query` and `update` — each of which\ncan be invoked over HTTP with several encodings of the SPARQL string.\n\nThis OpenAPI description models only the protocol operations explicitly\ndefined in https://www.w3.org/TR/sparql11-protocol/. It does not model\nany vendor-specific authentication scheme; the spec leaves authentication\nto implementations (\"implementations may choose to use HTTP authentication\nmechanisms or other implementation-defined mechanisms\"). The example\nserver is the public DBpedia SPARQL endpoint which accepts query\nrequests without authentication.\n\nThe Graph Store HTTP Protocol (a sibling specification at\nhttps://www.w3.org/TR/sparql11-http-rdf-update/) is not modeled here.\n\n\nContact Support:\n Name: W3C SPARQL Working Group",
+      "type": "text/plain"
+    }
+  }
+}

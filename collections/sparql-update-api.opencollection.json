@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SPARQL 1.1 Protocol Query Update API",
+    "version": "1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Update",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Execute a SPARQL update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dbpedia.org/sparql/update",
+            "params": [
+              {
+                "name": "using-graph-uri",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "using-named-graph-uri",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "update",
+                  "value": ""
+                },
+                {
+                  "name": "using-graph-uri",
+                  "value": ""
+                },
+                {
+                  "name": "using-named-graph-uri",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Executes a SPARQL update. Two encodings are defined by the SPARQL 1.1\nProtocol:\n\n* `application/x-www-form-urlencoded` — the body carries the\n  `update`, `using-graph-uri`, and `using-named-graph-uri`\n  parameters.\n* `application/sparql-update` — the body IS the SPARQL update\n  string, in UTF-8.\n\nMany implementations expose update on a distinct path (e.g.\n`/sparql/update`) or require authentication; this is\nimplementation-defined.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
