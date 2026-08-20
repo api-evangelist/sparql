@@ -43,6 +43,11 @@ apis:
   - Query
   - RDF
   - SPARQL
+  tags_raw:
+  - Graph Store
+  - Query
+  - RDF
+  - SPARQL
   - Update
   properties:
   - type: x-openapi
@@ -80,6 +85,8 @@ apis:
   humanURL: https://www.w3.org/TR/sparql11-protocol/
   baseURL: https://dbpedia.org/sparql
   tags:
+  - SPARQL
+  tags_raw:
   - Sparql
   properties:
   - type: OpenAPI
@@ -100,6 +107,8 @@ apis:
   humanURL: https://www.w3.org/TR/sparql11-protocol/
   baseURL: https://dbpedia.org/sparql
   tags:
+  - SPARQL Update
+  tags_raw:
   - Sparql Update
   properties:
   - type: OpenAPI
@@ -109,7 +118,8 @@ apis:
   description: SPARQL update operation
   humanURL: https://www.w3.org/TR/sparql11-protocol/
   baseURL: https://dbpedia.org/sparql
-  tags:
+  tags: []
+  tags_raw:
   - Update
   properties:
   - type: OpenAPI
