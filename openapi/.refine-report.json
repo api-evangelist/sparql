@@ -1,24 +1,29 @@
 {
   "provider": "sparql",
   "sources": [
-    "sparql-query-api-openapi.yml",
-    "sparql-update-api-openapi.yml",
-    "openapi.yml"
+    "_original/openapi.yml",
+    "_original/sparql-openapi.yml"
   ],
   "outputs": [
-    "sparql-query-api-openapi.yml",
-    "sparql-update-api-openapi.yml",
     "sparql-sparql-api-openapi.yml",
     "sparql-sparql-graph-api-openapi.yml",
-    "sparql-sparql-update-api-openapi.yml"
+    "sparql-sparql-update-api-openapi.yml",
+    "sparql-query-api-openapi.yml",
+    "sparql-update-api-openapi.yml"
   ],
-  "archived": [
-    "archived openapi.yml"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
-    "discovered stray spec: openapi.yml"
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sparql-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0"
   ],
-  "skipped": []
+  "skipped": [
+    "sparql-query-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sparql-sparql-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sparql-sparql-graph-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sparql-sparql-update-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sparql-update-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

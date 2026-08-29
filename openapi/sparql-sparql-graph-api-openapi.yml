@@ -1,51 +1,21 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: SPARQL 1.1 Protocol Query Sparql Graph API
-  description: 'SPARQL 1.1 Protocol is a W3C Recommendation that defines how to convey
-
-    SPARQL queries and updates between clients and SPARQL processors over
-
-    HTTP. It defines two operations — `query` and `update` — each of which
-
-    can be invoked over HTTP with several encodings of the SPARQL string.
-
-
-    This OpenAPI description models only the protocol operations explicitly
-
-    defined in https://www.w3.org/TR/sparql11-protocol/. It does not model
-
-    any vendor-specific authentication scheme; the spec leaves authentication
-
-    to implementations ("implementations may choose to use HTTP authentication
-
-    mechanisms or other implementation-defined mechanisms"). The example
-
-    server is the public DBpedia SPARQL endpoint which accepts query
-
-    requests without authentication.
-
-
-    The Graph Store HTTP Protocol (a sibling specification at
-
-    https://www.w3.org/TR/sparql11-http-rdf-update/) is not modeled here.
-
-    '
+  title: SPARQL Protocol Sparql Graph API
+  description: OpenAPI specification for the SPARQL 1.1 Protocol, a W3C Recommendation that defines HTTP operations for executing SPARQL queries and updates against an RDF dataset. The protocol supports both query operations (SELECT, ASK, CONSTRUCT, DESCRIBE) and update operations (INSERT, DELETE, LOAD, CLEAR) via standard HTTP methods.
   version: '1.1'
   contact:
     name: W3C SPARQL Working Group
-    url: https://www.w3.org/TR/sparql11-protocol/
+    url: https://www.w3.org/2009/sparql/wiki/Main_Page
   license:
-    name: W3C Document License
-    url: https://www.w3.org/Consortium/Legal/2015/doc-license
+    name: W3C Software and Document License
+    url: https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
 servers:
-- url: https://dbpedia.org
-  description: Public DBpedia SPARQL endpoint (no auth)
-- url: https://{host}
-  description: Generic SPARQL 1.1 endpoint
+- url: '{sparqlEndpoint}'
+  description: SPARQL Protocol Endpoint
   variables:
-    host:
-      default: example.org
-      description: Hostname of a SPARQL 1.1 endpoint
+    sparqlEndpoint:
+      default: https://dbpedia.org/sparql
+      description: The URL of the SPARQL endpoint
 tags:
 - name: Sparql Graph
 paths:
@@ -195,3 +165,6 @@ paths:
           description: Named graph not found
       tags:
       - Sparql Graph
+externalDocs:
+  description: SPARQL 1.1 Protocol - W3C Recommendation
+  url: https://www.w3.org/TR/sparql11-protocol/
