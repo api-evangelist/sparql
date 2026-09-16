@@ -1,17 +1,18 @@
-generated: '2026-07-15'
+generated: '2026-09-16'
 method: generated
-source: openapi/sparql-openapi.yml
+source: openapi/sparql-query-api-openapi.yml, openapi/sparql-sparql-api-openapi.yml, openapi/sparql-sparql-graph-api-openapi.yml,
+  openapi/sparql-sparql-update-api-openapi.yml, openapi/sparql-update-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 3
+  operations: 10
   by_action_class:
-    connected: 1
-    acting: 2
+    connected: 3
+    acting: 7
   by_consequence:
-    read: 1
-    write: 2
+    read: 3
+    write: 7
   human_in_the_loop_required: 0
 operations:
 - path: /sparql
@@ -27,6 +28,106 @@ operations:
 - path: /sparql
   method: post
   operationId: queryPost
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /sparql
+  method: get
+  operationId: sparqlQueryGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /sparql
+  method: post
+  operationId: sparqlQueryPost
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /sparql-graph
+  method: get
+  operationId: graphStoreGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /sparql-graph
+  method: put
+  operationId: graphStorePut
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /sparql-graph
+  method: post
+  operationId: graphStorePost
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /sparql-graph
+  method: delete
+  operationId: graphStoreDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /sparql-update
+  method: post
+  operationId: sparqlUpdate
   x-agentic-access:
     action-class: acting
     consequence: write
