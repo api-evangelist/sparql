@@ -24,28 +24,25 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/sparql.png
 name: SPARQL
-description: >-
-  SPARQL (SPARQL Protocol and RDF Query Language) is a W3C Recommendation that provides
-  a standardized query language for retrieving and manipulating data stored in Resource
-  Description Framework (RDF) format. It includes a protocol for submitting queries
-  and updates over HTTP, a JSON results format for SELECT and ASK queries, and a Graph
-  Store HTTP Protocol for managing RDF graphs.
+description: SPARQL (SPARQL Protocol and RDF Query Language) is a W3C Recommendation that provides a standardized
+  query language for retrieving and manipulating data stored in Resource Description Framework (RDF) format.
+  It includes a protocol for submitting queries and updates over HTTP, a JSON results format for SELECT
+  and ASK queries, and a Graph Store HTTP Protocol for managing RDF graphs.
 url: https://www.w3.org/TR/sparql11-overview/
 tags:
-  - Linked Data
-  - Query Language
-  - RDF
-  - Semantic Web
-  - SPARQL
-  - W3C
+- Linked Data
+- Query Language
+- RDF
+- Semantic Web
+- SPARQL
+- W3C
 created: '2025'
-modified: '2026-03-16'
+modified: '2026-09-16'
 apis:
 - name: SPARQL Protocol API
-  description: >-
-    Standard SPARQL 1.1 Protocol HTTP endpoints for executing queries and updates against RDF datasets,
-    plus the Graph Store HTTP Protocol for direct management of named graphs and the default graph, as
-    defined by the W3C Recommendation.
+  description: Standard SPARQL 1.1 Protocol HTTP endpoints for executing queries and updates against RDF
+    datasets, plus the Graph Store HTTP Protocol for direct management of named graphs and the default
+    graph, as defined by the W3C Recommendation.
   humanURL: https://www.w3.org/TR/sparql11-protocol/
   baseURL: https://dbpedia.org/sparql
   version: '1.1'
@@ -91,7 +88,7 @@ apis:
   - type: OpenAPI
     url: openapi/sparql-query-api-openapi.yml
 - aid: sparql:sparql-sparql-api
-  name: SPARQL Sparql API
+  name: SPARQL API
   description: The Sparql API from SPARQL — 1 operation(s) for sparql.
   humanURL: https://www.w3.org/TR/sparql11-protocol/
   baseURL: https://dbpedia.org/sparql
@@ -103,7 +100,7 @@ apis:
   - type: OpenAPI
     url: openapi/sparql-sparql-api-openapi.yml
 - aid: sparql:sparql-sparql-graph-api
-  name: SPARQL Sparql Graph API
+  name: SPARQL Graph API
   description: The Sparql Graph API from SPARQL — 1 operation(s) for sparql graph.
   humanURL: https://www.w3.org/TR/sparql11-protocol/
   baseURL: https://dbpedia.org/sparql
@@ -113,7 +110,7 @@ apis:
   - type: OpenAPI
     url: openapi/sparql-sparql-graph-api-openapi.yml
 - aid: sparql:sparql-sparql-update-api
-  name: SPARQL Sparql Update API
+  name: SPARQL Update API
   description: The Sparql Update API from SPARQL — 1 operation(s) for sparql update.
   humanURL: https://www.w3.org/TR/sparql11-protocol/
   baseURL: https://dbpedia.org/sparql
@@ -135,7 +132,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/sparql-update-api-openapi.yml
-common: []
 common:
 - type: AgenticAccess
   url: agentic-access/sparql-agentic-access.yml
