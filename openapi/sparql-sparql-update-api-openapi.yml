@@ -17,7 +17,7 @@ servers:
       default: https://dbpedia.org/sparql
       description: The URL of the SPARQL endpoint
 tags:
-- name: Sparql Update
+- name: SPARQL Update
 paths:
   /sparql-update:
     post:
@@ -71,16 +71,9 @@ paths:
         '500':
           $ref: '#/components/responses/QueryExecutionFailure'
       tags:
-      - Sparql Update
+      - SPARQL Update
 components:
   responses:
-    MalformedQuery:
-      description: The SPARQL query or update string is syntactically invalid or malformed.
-      content:
-        text/plain:
-          schema:
-            type: string
-            description: Error message describing the syntax issue
     QueryExecutionFailure:
       description: The server encountered an error while executing the query or update operation.
       content:
@@ -88,6 +81,13 @@ components:
           schema:
             type: string
             description: Error message describing the execution failure
+    MalformedQuery:
+      description: The SPARQL query or update string is syntactically invalid or malformed.
+      content:
+        text/plain:
+          schema:
+            type: string
+            description: Error message describing the syntax issue
 externalDocs:
   description: SPARQL 1.1 Protocol - W3C Recommendation
   url: https://www.w3.org/TR/sparql11-protocol/

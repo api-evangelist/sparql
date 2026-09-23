@@ -5,31 +5,7 @@ info:
 
     SPARQL queries and updates between clients and SPARQL processors over
 
-    HTTP. It defines two operations — `query` and `update` — each of which
-
-    can be invoked over HTTP with several encodings of the SPARQL string.
-
-
-    This OpenAPI description models only the protocol operations explicitly
-
-    defined in https://www.w3.org/TR/sparql11-protocol/. It does not model
-
-    any vendor-specific authentication scheme; the spec leaves authentication
-
-    to implementations ("implementations may choose to use HTTP authentication
-
-    mechanisms or other implementation-defined mechanisms"). The example
-
-    server is the public DBpedia SPARQL endpoint which accepts query
-
-    requests without authentication.
-
-
-    The Graph Store HTTP Protocol (a sibling specification at
-
-    https://www.w3.org/TR/sparql11-http-rdf-update/) is not modeled here.
-
-    '
+    HTTP.'
   version: '1.1'
   contact:
     name: W3C SPARQL Working Group
@@ -61,9 +37,7 @@ paths:
 
         and `named-graph-uri` parameters may be repeated to specify the
 
-        RDF dataset against which the query is evaluated.
-
-        '
+        RDF dataset against which the query is evaluated.'
       operationId: queryGet
       parameters:
       - name: query
@@ -138,7 +112,22 @@ paths:
       tags:
       - Query
       summary: Execute a SPARQL query via POST
-      description: "Executes a SPARQL query via POST. Two encodings are defined by the\nSPARQL 1.1 Protocol:\n\n* `application/x-www-form-urlencoded` — the body carries the same\n  parameters as the GET variant (`query`, `default-graph-uri`,\n  `named-graph-uri`).\n* `application/sparql-query` — the body IS the SPARQL query string,\n  in UTF-8, and `default-graph-uri` / `named-graph-uri` may still\n  appear in the URL query string.\n"
+      description: 'Executes a SPARQL query via POST. Two encodings are defined by the
+
+        SPARQL 1.1 Protocol:
+
+
+        * `application/x-www-form-urlencoded` — the body carries the same
+
+        parameters as the GET variant (`query`, `default-graph-uri`,
+
+        `named-graph-uri`).
+
+        * `application/sparql-query` — the body IS the SPARQL query string,
+
+        in UTF-8, and `default-graph-uri` / `named-graph-uri` may still
+
+        appear in the URL query string.'
       operationId: queryPost
       parameters:
       - name: default-graph-uri

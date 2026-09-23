@@ -5,31 +5,7 @@ info:
 
     SPARQL queries and updates between clients and SPARQL processors over
 
-    HTTP. It defines two operations — `query` and `update` — each of which
-
-    can be invoked over HTTP with several encodings of the SPARQL string.
-
-
-    This OpenAPI description models only the protocol operations explicitly
-
-    defined in https://www.w3.org/TR/sparql11-protocol/. It does not model
-
-    any vendor-specific authentication scheme; the spec leaves authentication
-
-    to implementations ("implementations may choose to use HTTP authentication
-
-    mechanisms or other implementation-defined mechanisms"). The example
-
-    server is the public DBpedia SPARQL endpoint which accepts query
-
-    requests without authentication.
-
-
-    The Graph Store HTTP Protocol (a sibling specification at
-
-    https://www.w3.org/TR/sparql11-http-rdf-update/) is not modeled here.
-
-    '
+    HTTP.'
   version: '1.1'
   contact:
     name: W3C SPARQL Working Group
@@ -55,7 +31,27 @@ paths:
       tags:
       - Update
       summary: Execute a SPARQL update
-      description: "Executes a SPARQL update. Two encodings are defined by the SPARQL 1.1\nProtocol:\n\n* `application/x-www-form-urlencoded` — the body carries the\n  `update`, `using-graph-uri`, and `using-named-graph-uri`\n  parameters.\n* `application/sparql-update` — the body IS the SPARQL update\n  string, in UTF-8.\n\nMany implementations expose update on a distinct path (e.g.\n`/sparql/update`) or require authentication; this is\nimplementation-defined.\n"
+      description: 'Executes a SPARQL update. Two encodings are defined by the SPARQL 1.1
+
+        Protocol:
+
+
+        * `application/x-www-form-urlencoded` — the body carries the
+
+        `update`, `using-graph-uri`, and `using-named-graph-uri`
+
+        parameters.
+
+        * `application/sparql-update` — the body IS the SPARQL update
+
+        string, in UTF-8.
+
+
+        Many implementations expose update on a distinct path (e.g.
+
+        `/sparql/update`) or require authentication; this is
+
+        implementation-defined.'
       operationId: update
       parameters:
       - name: using-graph-uri

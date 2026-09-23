@@ -126,62 +126,6 @@ paths:
       tags:
       - Sparql
 components:
-  parameters:
-    AcceptQuery:
-      name: Accept
-      in: header
-      description: Desired response content type
-      schema:
-        type: string
-        enum:
-        - application/sparql-results+json
-        - application/sparql-results+xml
-        - text/turtle
-        - application/rdf+xml
-        - application/ld+json
-        - text/csv
-        - text/tab-separated-values
-        default: application/sparql-results+json
-    DefaultGraphUri:
-      name: default-graph-uri
-      in: query
-      description: Specifies the default graph for the query. Multiple values may be provided to define a dataset with a merged default graph.
-      schema:
-        type: string
-        format: uri
-      style: form
-      explode: true
-    Timeout:
-      name: timeout
-      in: query
-      description: Maximum execution time for the query in milliseconds. Not part of the W3C specification but commonly supported by SPARQL endpoints.
-      schema:
-        type: integer
-        minimum: 0
-    NamedGraphUri:
-      name: named-graph-uri
-      in: query
-      description: Specifies a named graph for the query dataset. Multiple values may be provided.
-      schema:
-        type: string
-        format: uri
-      style: form
-      explode: true
-  responses:
-    QueryExecutionFailure:
-      description: The server encountered an error while executing the query or update operation.
-      content:
-        text/plain:
-          schema:
-            type: string
-            description: Error message describing the execution failure
-    MalformedQuery:
-      description: The SPARQL query or update string is syntactically invalid or malformed.
-      content:
-        text/plain:
-          schema:
-            type: string
-            description: Error message describing the syntax issue
   schemas:
     SparqlResultsJson:
       type: object
@@ -241,6 +185,62 @@ components:
           type: string
           format: uri
           description: Datatype IRI for typed literals. Present when type is "typed-literal" or "literal" with a datatype.
+  parameters:
+    AcceptQuery:
+      name: Accept
+      in: header
+      description: Desired response content type
+      schema:
+        type: string
+        enum:
+        - application/sparql-results+json
+        - application/sparql-results+xml
+        - text/turtle
+        - application/rdf+xml
+        - application/ld+json
+        - text/csv
+        - text/tab-separated-values
+        default: application/sparql-results+json
+    DefaultGraphUri:
+      name: default-graph-uri
+      in: query
+      description: Specifies the default graph for the query. Multiple values may be provided to define a dataset with a merged default graph.
+      schema:
+        type: string
+        format: uri
+      style: form
+      explode: true
+    Timeout:
+      name: timeout
+      in: query
+      description: Maximum execution time for the query in milliseconds. Not part of the W3C specification but commonly supported by SPARQL endpoints.
+      schema:
+        type: integer
+        minimum: 0
+    NamedGraphUri:
+      name: named-graph-uri
+      in: query
+      description: Specifies a named graph for the query dataset. Multiple values may be provided.
+      schema:
+        type: string
+        format: uri
+      style: form
+      explode: true
+  responses:
+    QueryExecutionFailure:
+      description: The server encountered an error while executing the query or update operation.
+      content:
+        text/plain:
+          schema:
+            type: string
+            description: Error message describing the execution failure
+    MalformedQuery:
+      description: The SPARQL query or update string is syntactically invalid or malformed.
+      content:
+        text/plain:
+          schema:
+            type: string
+            description: Error message describing the syntax issue
 externalDocs:
   description: SPARQL 1.1 Protocol - W3C Recommendation
   url: https://www.w3.org/TR/sparql11-protocol/
