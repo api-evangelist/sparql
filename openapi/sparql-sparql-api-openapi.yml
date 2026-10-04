@@ -126,6 +126,21 @@ paths:
       tags:
       - Sparql
 components:
+  responses:
+    MalformedQuery:
+      description: The SPARQL query or update string is syntactically invalid or malformed.
+      content:
+        text/plain:
+          schema:
+            type: string
+            description: Error message describing the syntax issue
+    QueryExecutionFailure:
+      description: The server encountered an error while executing the query or update operation.
+      content:
+        text/plain:
+          schema:
+            type: string
+            description: Error message describing the execution failure
   parameters:
     DefaultGraphUri:
       name: default-graph-uri
@@ -136,13 +151,6 @@ components:
         format: uri
       style: form
       explode: true
-    Timeout:
-      name: timeout
-      in: query
-      description: Maximum execution time for the query in milliseconds. Not part of the W3C specification but commonly supported by SPARQL endpoints.
-      schema:
-        type: integer
-        minimum: 0
     NamedGraphUri:
       name: named-graph-uri
       in: query
@@ -167,6 +175,13 @@ components:
         - text/csv
         - text/tab-separated-values
         default: application/sparql-results+json
+    Timeout:
+      name: timeout
+      in: query
+      description: Maximum execution time for the query in milliseconds. Not part of the W3C specification but commonly supported by SPARQL endpoints.
+      schema:
+        type: integer
+        minimum: 0
   schemas:
     SparqlResultsJson:
       type: object
@@ -226,21 +241,6 @@ components:
           type: string
           format: uri
           description: Datatype IRI for typed literals. Present when type is "typed-literal" or "literal" with a datatype.
-  responses:
-    MalformedQuery:
-      description: The SPARQL query or update string is syntactically invalid or malformed.
-      content:
-        text/plain:
-          schema:
-            type: string
-            description: Error message describing the syntax issue
-    QueryExecutionFailure:
-      description: The server encountered an error while executing the query or update operation.
-      content:
-        text/plain:
-          schema:
-            type: string
-            description: Error message describing the execution failure
 externalDocs:
   description: SPARQL 1.1 Protocol - W3C Recommendation
   url: https://www.w3.org/TR/sparql11-protocol/
