@@ -191,6 +191,25 @@ paths:
           description: Malformed query
 components:
   schemas:
+    RdfTerm:
+      type: object
+      required:
+      - type
+      - value
+      properties:
+        type:
+          type: string
+          enum:
+          - uri
+          - literal
+          - bnode
+        value:
+          type: string
+        datatype:
+          type: string
+          format: uri
+        xml:lang:
+          type: string
     SparqlResultsJson:
       type: object
       description: 'SPARQL Query Results JSON Format, per
@@ -225,22 +244,3 @@ components:
         boolean:
           type: boolean
           description: Present for ASK queries
-    RdfTerm:
-      type: object
-      required:
-      - type
-      - value
-      properties:
-        type:
-          type: string
-          enum:
-          - uri
-          - literal
-          - bnode
-        value:
-          type: string
-        datatype:
-          type: string
-          format: uri
-        xml:lang:
-          type: string

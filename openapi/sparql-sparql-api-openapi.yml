@@ -126,31 +126,7 @@ paths:
       tags:
       - Sparql
 components:
-  responses:
-    MalformedQuery:
-      description: The SPARQL query or update string is syntactically invalid or malformed.
-      content:
-        text/plain:
-          schema:
-            type: string
-            description: Error message describing the syntax issue
-    QueryExecutionFailure:
-      description: The server encountered an error while executing the query or update operation.
-      content:
-        text/plain:
-          schema:
-            type: string
-            description: Error message describing the execution failure
   parameters:
-    DefaultGraphUri:
-      name: default-graph-uri
-      in: query
-      description: Specifies the default graph for the query. Multiple values may be provided to define a dataset with a merged default graph.
-      schema:
-        type: string
-        format: uri
-      style: form
-      explode: true
     NamedGraphUri:
       name: named-graph-uri
       in: query
@@ -182,7 +158,56 @@ components:
       schema:
         type: integer
         minimum: 0
+    DefaultGraphUri:
+      name: default-graph-uri
+      in: query
+      description: Specifies the default graph for the query. Multiple values may be provided to define a dataset with a merged default graph.
+      schema:
+        type: string
+        format: uri
+      style: form
+      explode: true
+  responses:
+    QueryExecutionFailure:
+      description: The server encountered an error while executing the query or update operation.
+      content:
+        text/plain:
+          schema:
+            type: string
+            description: Error message describing the execution failure
+    MalformedQuery:
+      description: The SPARQL query or update string is syntactically invalid or malformed.
+      content:
+        text/plain:
+          schema:
+            type: string
+            description: Error message describing the syntax issue
   schemas:
+    RdfTerm:
+      type: object
+      description: Represents an RDF term (IRI, literal, or blank node) in the SPARQL Results JSON format.
+      required:
+      - type
+      - value
+      properties:
+        type:
+          type: string
+          description: The type of the RDF term
+          enum:
+          - uri
+          - literal
+          - bnode
+          - typed-literal
+        value:
+          type: string
+          description: The value of the RDF term
+        xml:lang:
+          type: string
+          description: Language tag for language-tagged literals (e.g., "en", "fr"). Present only when type is "literal".
+        datatype:
+          type: string
+          format: uri
+          description: Datatype IRI for typed literals. Present when type is "typed-literal" or "literal" with a datatype.
     SparqlResultsJson:
       type: object
       description: SPARQL Query Results JSON Format as defined by W3C. Used for SELECT and ASK query results.
@@ -216,31 +241,6 @@ components:
         boolean:
           type: boolean
           description: Result of an ASK query. Present instead of results for ASK query forms.
-    RdfTerm:
-      type: object
-      description: Represents an RDF term (IRI, literal, or blank node) in the SPARQL Results JSON format.
-      required:
-      - type
-      - value
-      properties:
-        type:
-          type: string
-          description: The type of the RDF term
-          enum:
-          - uri
-          - literal
-          - bnode
-          - typed-literal
-        value:
-          type: string
-          description: The value of the RDF term
-        xml:lang:
-          type: string
-          description: Language tag for language-tagged literals (e.g., "en", "fr"). Present only when type is "literal".
-        datatype:
-          type: string
-          format: uri
-          description: Datatype IRI for typed literals. Present when type is "typed-literal" or "literal" with a datatype.
 externalDocs:
   description: SPARQL 1.1 Protocol - W3C Recommendation
   url: https://www.w3.org/TR/sparql11-protocol/
